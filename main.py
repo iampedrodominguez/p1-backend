@@ -19,10 +19,8 @@ async def root():
 async def chat(request: dict):
     text = request["message"]
 
-    prompt = {"role": "system", "content": "You are a helpful assistant."}
-    user = {"role": "user", "content": "You suck ass"}
-
-    print("TEST")
+    prompt = {"role": "system", "content": "You are an assistant in Google Play's customer service team. Your job is to receive feedback and reviews from the user. In the case of mixed reviews, be thankful for the good parts and helpful with the bad parts. "}
+    user = {"role": "user", "content": "App: BetterSleep. Review: This app is useless. It made my sleeping schedule even worse"}
 
     response = openai.ChatCompletion.create(
         model = "gpt-3.5-turbo",
