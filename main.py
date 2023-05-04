@@ -1,8 +1,12 @@
 from fastapi import FastAPI
 import openai
 from dotenv import load_dotenv
-
 import os
+
+# Import Azure libraries
+import logging
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -19,8 +23,13 @@ async def root():
 async def chat(request: dict):
     text = request["message"]
 
+    logging.info('REVIEW RECEIVED')
+
     prompt = {"role": "system", "content": "You are an assistant in Google Play's customer service team. Your job is to receive feedback and reviews from the user. In the case of mixed reviews, be thankful for the good parts and helpful with the bad parts. "}
     user = {"role": "user", "content": "App: BetterSleep. Review: This app is useless. It made my sleeping schedule even worse"}
+    
+    logging.info('AI THINKING')
+
 
     response = openai.ChatCompletion.create(
         model = "gpt-3.5-turbo",
@@ -28,5 +37,5 @@ async def chat(request: dict):
         messages = [prompt, user]
         )
 
-    print(f"{response.choices[0].message.content}")
-    # return {"message": response.choices[0].text.strip()}
+    logging.info('RESPONSE SENT')
+    return response.choices[0].message.content
