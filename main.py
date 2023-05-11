@@ -20,7 +20,7 @@ origins = [
     "http://localhost:3000",
     "http://localhost:8000/chat",
     "https://analysis-result.azurewebsites.net/chat",
-    "https://act-is-2-elim-plant.vercel.app/"
+    "https://act-is-2-elim-plant.vercel.app"
     ]
 
 app.add_middleware(
