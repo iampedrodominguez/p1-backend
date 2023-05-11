@@ -37,13 +37,13 @@ async def root():
 
 @app.post("/chat")
 async def chat(request: dict):
-    #app = request["app"]
+    app = request["app"]
     text = request["message"]
 
     logging.info('REVIEW RECEIVED')
 
     prompt = {"role": "system", "content": "You are an assistant in Google Play's customer service team. Your job is to receive feedback and reviews from the user. In the case of mixed reviews, be thankful for the good parts and helpful with the bad parts. "}
-    user = {"role": "user", "content": f"App: BetterSleep. Review: {text}"}
+    user = {"role": "user", "content": f"App: {app}. Review: {text}"}
     
     logging.info('AI THINKING')
 
